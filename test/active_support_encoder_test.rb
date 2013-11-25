@@ -42,6 +42,16 @@ class TestJSONEncoding < ActiveSupport::TestCase
     end
   end
 
+  class EncodeJsonTest
+    def as_json(*)
+      self
+    end
+
+    def encode_json(encoder)
+      'encode_json'
+    end
+  end
+
   class HashWithAsJson < Hash
     attr_accessor :as_json_called
 
@@ -92,6 +102,11 @@ class TestJSONEncoding < ActiveSupport::TestCase
                    [ Custom.new({ :foo => "hello", :bar => "world" }), '{"bar":"world","foo":"hello"}' ],
                    [ Custom.new(Hashlike.new), '{"bar":"world","foo":"hello"}' ],
                    [ Custom.new(Custom.new(Custom.new(:a))), '"a"' ]]
+
+  EncodeJsonTests = [[ EncodeJsonTest.new, 'encode_json' ],
+                     [ [EncodeJsonTest.new], '[encode_json]' ],
+                     [ { json: EncodeJsonTest.new }, '{"json":encode_json}' ],
+                     [ Custom.new(EncodeJsonTest.new), 'encode_json' ]]
 
   RegexpTests   = [[ /^a/, '"(?-mix:^a)"' ], [/^\w{1,2}[a-z]+/ix, '"(?ix-m:^\\\\w{1,2}[a-z]+)"']]
 
