@@ -419,6 +419,10 @@ class TestJSONEncoding < ActiveSupport::TestCase
     end
   end
 
+  def test_reading_encode_big_decimal_as_string_option
+    assert_not_deprecated { assert ActiveSupport.encode_big_decimal_as_string }
+  end
+
   def test_nil_true_and_false_represented_as_themselves
     assert_equal nil,   nil.as_json
     assert_equal true,  true.as_json

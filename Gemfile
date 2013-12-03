@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'chancancode/rails', branch: 'json_encoder_refactor'
+gem 'rails', github: 'rails/rails', branch: 'master'
 gem 'arel', github: 'rails/arel', branch: 'master'
 
 gemspec
