@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["david@loudthinking.com"]
   gem.description   = 'A pure-Ruby ActiveSupport JSON encoder'
   gem.summary       = 'A pure-Ruby ActiveSupport JSON encoder (extracted from core in Rails 4.1)'
-  gem.homepage      = 'https://github.com/vanruby/activesupport-json_encoder'
+  gem.homepage      = 'https://github.com/rails/activesupport-json_encoder'
   gem.license       = 'MIT'
 
   gem.required_ruby_version = '>= 1.9.3'
