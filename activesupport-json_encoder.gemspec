@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = 'activesupport-json_encoder'
-  gem.version       = '1.0.0.beta'
+  gem.version       = '1.0.0'
   gem.authors       = ["David Heinemeier Hansson"]
   gem.email         = ["david@loudthinking.com"]
   gem.description   = 'A pure-Ruby ActiveSupport JSON encoder'
