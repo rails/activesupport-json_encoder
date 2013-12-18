@@ -18,25 +18,22 @@ Configuration
 By default, ActiveSupport encodes `BigDecimal` objects as a string:
 
 ```ruby
->> { big_number: BigDecimal.new('12345678901234567890') }.to_json
-=> "{\"big_number\":\"12345678901234567890.0\"}"
+{ big_number: BigDecimal.new('12345678901234567890') }.to_json # => "{\"big_number\":\"12345678901234567890.0\"}"
 ```
 
 To change this, you can set `ActiveSupport.encode_big_decimal_as_string` to
 `false`:
 
 ```ruby
->> ActiveSupport.encode_big_decimal_as_string = false
->> { big_number: BigDecimal.new('12345678901234567890') }.to_json
-=> "{\"big_number\":12345678901234567890.0}"
+ActiveSupport.encode_big_decimal_as_string = false
+{ big_number: BigDecimal.new('12345678901234567890') }.to_json # => "{\"big_number\":12345678901234567890.0}"
 ```
 
 Beware that you may lose precision on the consuming-end if you do this:
 
 ```javascript
-> // Parsing this in JavaScript in the browser
-> JSON.parse("{\"big_number\":12345678901234567890.0}").big_number
-  12345678901234567000
+// Parsing this in JavaScript in the browser
+JSON.parse("{\"big_number\":12345678901234567890.0}").big_number // => 12345678901234567000
 ```
 
 JSON Serialization for Custom Objects
@@ -46,14 +43,13 @@ By default, when the encoder encounters a Ruby object that it does not
 recognize, it will serilizes its instance variables:
 
 ```ruby
->> class MyClass
->>   def initialize
->>     @foo = :bar
->>   end
->> end
-=> nil
->> MyClass.new.to_json
-=> "{\"foo\":\"bar\"}"
+class MyClass
+  def initialize
+    @foo = :bar
+  end
+end
+
+MyClass.new.to_json # => "{\"foo\":\"bar\"}"
 ```
 
 There are two ways to customize this behavior on a per-class basis. Typically,
@@ -61,16 +57,14 @@ you should override `#as_json` to return a Ruby-representation of your object.
 Any options passed to `#to_json` will be made available to this method:
 
 ```ruby
->> class MyClass
->>   def as_json(options = {})
->>     options[:as_array] ? [:foo, :bar] : {foo: :bar}
->>   end
->> end
-=> nil
->> MyClass.new.to_json
-=> "{\"foo\":\"bar\"}"
->> MyClass.new.to_json(as_array: true)
-=> "[\"foo\",\"bar\"]"
+class MyClass
+  def as_json(options = {})
+    options[:as_array] ? [:foo, :bar] : {foo: :bar}
+  end
+end
+
+MyClass.new.to_json # => "{\"foo\":\"bar\"}"
+MyClass.new.to_json(as_array: true) # => "[\"foo\",\"bar\"]"
 ```
 
 This method is supported by all encoders.
@@ -82,28 +76,27 @@ object and is expected to return a `String` that would be injected to the JSON
 output directly:
 
 ```ruby
->> class Money
->>   def initialize(dollars, cents)
->>     @dollars = dollars
->>     @cents = cents
->>   end
->> 
->>   def as_json(options = nil)
->>     # Opt-out from the default Object#as_json
->>     self
->>   end
->> 
->>   def encode_json(encoder)
->>     if @cents.to_i < 10
->>       "#{@dollars.to_i}.0#{@cents.to_i}"
->>     else
->>       "#{@dollars.to_i}.#{@cents.to_i}"
->>     end
->>   end
->> end
-=> nil
->> { price: Money.new(0,10) }.to_json
-=> "{\"price\":0.10}"
+class Money
+  def initialize(dollars, cents)
+    @dollars = dollars
+    @cents = cents
+  end
+
+  def as_json(options = nil)
+    # Opt-out from the default Object#as_json
+    self
+  end
+
+  def encode_json(encoder)
+    if @cents.to_i < 10
+      "#{@dollars.to_i}.0#{@cents.to_i}"
+    else
+      "#{@dollars.to_i}.#{@cents.to_i}"
+    end
+  end
+end
+
+{ price: Money.new(0,10) }.to_json # => "{\"price\":0.10}"
 ```
 
 Beware that this function is specific to this gem and is not supported by
