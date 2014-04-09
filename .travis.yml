@@ -5,8 +5,18 @@ rvm:
   - 2.1.1
 gemfile:
   - Gemfile
+  - gemfiles/Gemfile-edge
+  - gemfiles/Gemfile-4-1-stable
+matrix:
+  allow_failures:
+    - gemfile: gemfiles/Gemfile-edge
 notifications:
   email: false
+  irc:
+    on_success: change
+    on_failure: always
+    channels:
+      - "irc.freenode.org#rails-contrib"
   campfire:
     on_success: change
     on_failure: always

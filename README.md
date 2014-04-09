@@ -108,4 +108,4 @@ when dealing with user input.
 Dependencies
 ------------
 
-* `activesupport` >= 4.1.0.beta
+* `activesupport` >= 4.1.0
