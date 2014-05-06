@@ -1,6 +1,8 @@
 Active Support JSON Encoder
 ===========================
 
+[![Build Status](https://travis-ci.org/rails/activesupport-json_encoder.svg?branch=master)](https://travis-ci.org/rails/activesupport-json_encoder)
+
 A pure-Ruby ActiveSupport JSON encoder. This was the default encoder used
 by ActiveSupport prior to Rails 4.1. The main advantage of using this
 encoder over the new default is for the `#encode_json` support (see below).
