@@ -42,7 +42,7 @@ JSON Serialization for Custom Objects
 -------------------------------------
 
 By default, when the encoder encounters a Ruby object that it does not
-recognize, it will serilizes its instance variables:
+recognize, it will serialize its instance variables:
 
 ```ruby
 class MyClass
