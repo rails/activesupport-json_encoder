@@ -12,7 +12,7 @@ Installation
 
 Simply include this gem in your Gemfile:
 
-    gem 'activesupport-json_encoder', github: 'rails/activesupport-json_encoder'
+    gem 'activesupport-json_encoder'
 
 Configuration
 -------------
