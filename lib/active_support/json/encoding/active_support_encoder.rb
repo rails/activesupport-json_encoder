@@ -124,7 +124,7 @@ end
 
 class String
   def encode_json(encoder) #:nodoc:
-    ActiveSupport::JSON::Encoding::ActiveSupportEncoder.escape(self)
+    ActiveSupport::JSON::Encoding::ActiveSupportEncoder.escape(self.dup.force_encoding("UTF-8"))
   end
 end
 
