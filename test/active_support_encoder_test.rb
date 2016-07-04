@@ -412,15 +412,15 @@ class TestJSONEncoding < ActiveSupport::TestCase
     big_decimal = BigDecimal('2.5')
 
     begin
-      ActiveSupport.encode_big_decimal_as_string = false
+      ActiveSupport::JSON::Encoding.encode_big_decimal_as_string = false
       assert_equal big_decimal.to_s, big_decimal.to_json
     ensure
-      ActiveSupport.encode_big_decimal_as_string = true
+      ActiveSupport::JSON::Encoding.encode_big_decimal_as_string = true
     end
   end
 
   def test_reading_encode_big_decimal_as_string_option
-    assert_not_deprecated { assert ActiveSupport.encode_big_decimal_as_string }
+    assert_not_deprecated { assert ActiveSupport::JSON::Encoding.encode_big_decimal_as_string }
   end
 
   def test_nil_true_and_false_represented_as_themselves
