@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = Dir['test/**/*.rb']
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'activesupport', '>= 4.1.0', '< 5.0'
+  gem.add_dependency 'activesupport', '>= 4.1.0'
 
   gem.add_development_dependency 'rake'
 end
