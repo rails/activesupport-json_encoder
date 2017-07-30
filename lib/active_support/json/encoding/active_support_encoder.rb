@@ -5,6 +5,13 @@ require 'set'
 require 'bigdecimal'
 
 module ActiveSupport
+  class << self
+    unless method_defined?(:encode_big_decimal_as_string)
+      delegate :encode_big_decimal_as_string, :encode_big_decimal_as_string=,
+        to: :'ActiveSupport::JSON::Encoding'
+    end
+  end
+
   module JSON
     module Encoding
       class CircularReferenceError < StandardError; end
@@ -92,7 +99,8 @@ module ActiveSupport
       end
 
       class << self
-        remove_method :encode_big_decimal_as_string, :encode_big_decimal_as_string=
+        remove_possible_method :encode_big_decimal_as_string
+        remove_possible_method :encode_big_decimal_as_string=
 
         # If false, serializes BigDecimal objects as numeric instead of wrapping
         # them in a string.
